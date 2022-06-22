@@ -8,8 +8,10 @@ type AppState = {
   setUserAnswer: Dispatch<SetStateAction<string>>
   partsOfEquation: { a: number; b: number; operator: string }
   evaluateUserAnswer: () => void
+  numOfCorrectAnswers: number
+  isCorrect: boolean
+  hasSubmitted: boolean
 }
-
 
 const initalContext = {
   userAnswer: "",
@@ -20,6 +22,9 @@ const initalContext = {
     operator: "+",
   },
   evaluateUserAnswer: () => {},
+  numOfCorrectAnswers: 0,
+  isCorrect: false,
+  hasSubmitted: false,
 }
 
 const AppContext = createContext<AppState>(initalContext)

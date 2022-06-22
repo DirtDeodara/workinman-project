@@ -4,6 +4,7 @@ import { AppProvider, useAppContext } from "./stores/AppProvider"
 import background from "./assets/space-background.jpg"
 import NumbersPad from "./Components/NumbersPad"
 import EquationDisplay from "./Components/EquationDisplay"
+import StarDisplay from "./Components/StarDisplay"
 
 const App = () => {
 
@@ -15,6 +16,7 @@ const App = () => {
         src={background}
         alt="an illustration of outer space"
       />
+        <StarDisplay />
         <EquationDisplay />
         <NumbersPad />
       </div>

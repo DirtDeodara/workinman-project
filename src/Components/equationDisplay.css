@@ -1,10 +1,11 @@
 .equationContainer {
     position: absolute;
-    top: 20vh;
+    top: 23vh;
     left: 0;
     right: 0;
     margin: 0 auto;
     display: flex;
+   width: max-content;
 }
 
 .element {

@@ -3,11 +3,17 @@ import { useMemo, useState } from "react"
 const useEquation = () => {
   const [userAnswer, setUserAnswer] = useState("")
   const [numOfCorrectAnswers, setNumOfCorrectAnswers] = useState(0)
+  const [isCorrect, setIsCorrect] = useState(false)
+  const [hasSubmitted, setHasSubmitted] = useState(false)
+
+  console.log("numOfCorrectAnswers:", numOfCorrectAnswers)
 
   const partsOfEquation = useMemo(() => {
-    const max = numOfCorrectAnswers < 2 ? 9 : 20 //TODO this should be a switch statement eventually to allow for more stages
-    const a = Math.ceil(Math.random() * max)
-    const b = Math.ceil(Math.random() * max)
+    const level = Math.floor(numOfCorrectAnswers / 3)
+    const max = (1 + level) * 10
+    const min = level * 10
+    const a = Math.ceil(Math.random() * (max - min) + min)
+    const b = Math.ceil(Math.random() * (max - min) + min)
     const operator = true ? "+" : "-"
 
     return {
@@ -18,6 +24,8 @@ const useEquation = () => {
   }, [numOfCorrectAnswers])
 
   const evaluateUserAnswer = () => {
+    setHasSubmitted(true)
+
     const { a, b, operator } = partsOfEquation
     let result
     switch (operator) {
@@ -27,18 +35,25 @@ const useEquation = () => {
       case "-":
         result = a - b
         break
-
       default:
         break
     }
+
     if (parseInt(userAnswer) === result) {
-      setNumOfCorrectAnswers((prevState) => prevState + 1)
-      setUserAnswer("CORRECT!")
+      setIsCorrect(true)
       setTimeout(() => {
+        setNumOfCorrectAnswers((prevState) => prevState + 1)
         setUserAnswer("")
+        setHasSubmitted(false)
+        setIsCorrect(false)
       }, 2000)
     } else {
-      setUserAnswer("")
+      setHasSubmitted(true)
+      setIsCorrect(false)
+      setTimeout(() => {
+        setUserAnswer("")
+        setHasSubmitted(false)
+      }, 2000)
     }
   }
 
@@ -47,6 +62,9 @@ const useEquation = () => {
     setUserAnswer,
     partsOfEquation,
     evaluateUserAnswer,
+    numOfCorrectAnswers,
+    isCorrect,
+    hasSubmitted,
   }
 }
 
