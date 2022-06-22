@@ -1,0 +1,25 @@
+import "./App.css"
+import { useState, useMemo, Dispatch } from "react"
+import { AppProvider, useAppContext } from "./stores/AppProvider"
+import background from "./assets/space-background.jpg"
+import NumbersPad from "./Components/NumbersPad"
+import EquationDisplay from "./Components/EquationDisplay"
+
+const App = () => {
+
+  return (
+    <AppProvider>
+      <div className="app">
+        <img
+        className="background"
+        src={background}
+        alt="an illustration of outer space"
+      />
+        <EquationDisplay />
+        <NumbersPad />
+      </div>
+    </AppProvider>
+  )
+}
+
+export default App

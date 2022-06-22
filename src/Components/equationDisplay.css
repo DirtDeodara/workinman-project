@@ -1,0 +1,13 @@
+.equationContainer {
+    position: absolute;
+    top: 20vh;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    display: flex;
+}
+
+.element {
+    display: flex;
+    height: 100px;
+}
